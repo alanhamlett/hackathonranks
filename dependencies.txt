@@ -1,0 +1,1 @@
+npm nginx python-dev memcached libmemcached-dev libpq-dev libpq5 rabbitmq-server postgresql-client-9.3 ntp unattended-upgrades htop
