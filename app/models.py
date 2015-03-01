@@ -16,7 +16,8 @@ from sqlalchemy import not_
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 
-from flask import current_app as app
+from app import app
+
 from flask import json
 from flask.ext.sqlalchemy import SQLAlchemy
 
