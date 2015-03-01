@@ -1,0 +1,27 @@
+{
+    "name": "hackathonranks",
+    "version": "1.0.0",
+    "private": true,
+    "ignore": [
+        ".jshintrc",
+        "**/.*",
+        "**/*.txt",
+        "test",
+        "tests",
+        "logs"
+    ],
+    "dependencies": {
+        "animate.css": "latest",
+        "backbone": "latest",
+        "bootstrap": "latest",
+        "c3": "latest",
+        "d3": "latest",
+        "d3-tip": "latest",
+        "fontawesome": "latest",
+        "jquery": "latest",
+        "mustache": "latest",
+        "underscore": "latest",
+        "underscore.string": "latest",
+        "wow": "latest"
+    }
+}

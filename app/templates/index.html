@@ -1,0 +1,22 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row m-top-xs-20">
+      <div class="col-xs-6 center-xs left-sm powered-by">
+        Powered by <a href="https://wakatime.com/">WakaTime</a>
+      </div>
+      <div class="col-xs-6 center-xs right-sm login-button">
+        <a href="/login" class="btn btn-success">Add my name to leaderboard</a>
+      </div>
+    </div>
+    <div class="row m-top-xs-20 hackers">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 center-xs left-sm">
+        <h2>Top Hackers at Launch 2015</h2>
+        {% for hacker in hackers %}
+          <p class="hacker">Hacker <a href="{{hacker.profile_url}}">{{hacker.full_name or hacker.username}}</a> coded {{hacker.coding_time}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
