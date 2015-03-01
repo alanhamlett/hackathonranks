@@ -11,8 +11,7 @@ from functools import wraps
 from urlparse import urlparse, urljoin
 
 from app import app
-from app.compat import u
-#from app.models import User
+from app.models import User
 
 from flask import redirect, request, url_for
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
@@ -40,13 +39,11 @@ login_manager.setup_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = User.query.filter_by(id=user_id, active=True).first()
+    user = User.query.filter_by(id=user_id).first()
     if user:
         uwsgi.set_logvar('user_id', str(user.id))
-        uwsgi.set_logvar('user_email', u(user.email).encode('ascii', errors='backslashreplace'))
     else:
         uwsgi.set_logvar('user_id', '')
-        uwsgi.set_logvar('user_email', '')
     return user
 
 

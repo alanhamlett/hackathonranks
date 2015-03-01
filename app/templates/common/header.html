@@ -1,0 +1,19 @@
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-content">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="fa fa-bars"></span>
+      </button>
+      <a class="navbar-brand" href="/">Hackathon Rank</a>
+    </div>
+
+    {% if not current_user or not current_user.is_authenticated() %}
+      <div id="navbar-content" class="collapse navbar-collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="/login">Log In</a></li>
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</div>

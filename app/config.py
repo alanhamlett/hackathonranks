@@ -55,3 +55,5 @@ COMPRESSOR_DEBUG = DEBUG
 COMPRESSOR_OFFLINE_COMPRESS = not DEBUG
 COMPRESSOR_OUTPUT_DIR = os.path.abspath(os.path.join(BASE_DIR, 'app/static/sdist'))
 COMPRESSOR_STATIC_PREFIX = '/static/sdist'
+
+USER_AGENT = 'hackathonrank/1.0.0'

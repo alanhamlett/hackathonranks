@@ -1,0 +1,32 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row m-top-xs-20 hackers">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 center-xs left-sm">
+        <h2>Create a new Hackathon Leaderboard</h2>
+        <form method="POST">
+          <div class="form-group">
+            <label for="name">Hackathon Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Launch 2015">
+          </div>
+          <div class="form-group">
+            <label for="timezone">Timezone</label>
+            <input type="text" class="form-control" id="timezone" name="timezone">
+          </div>
+          <div class="form-group">
+            <label for="coding_starts_at">Coding Starts</label>
+            <input type="text" class="form-control" id="coding_starts_at" name="coding_starts_at">
+          </div>
+          <div class="form-group">
+            <label for="coding_ends_at">Coding Ends</label>
+            <input type="text" class="form-control" id="coding_ends_at" name="coding_ends_at">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

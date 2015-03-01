@@ -2,7 +2,6 @@ alembic==0.7.3
 celery==3.1.17
 jac==0.14.1
 psycopg2==2.5.2
-python-firebase==1.2
 python-memcached==1.53
 pytz==2014.9
 rauth==0.7.0

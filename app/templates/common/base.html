@@ -23,6 +23,10 @@
 
   <body>
 
+    {% block header %}
+      {% include "common/header.html" %}
+    {% endblock %}
+
     {% block content %}
     {% endblock %}
 

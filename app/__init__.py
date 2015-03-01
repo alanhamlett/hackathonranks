@@ -24,6 +24,9 @@ app.jinja_env.globals.update(
 # Logging
 from app import logger
 
+# Database Models
+from app.models import *
+
 # JSON Serialization
 from app.json import CustomJSONEncoder, CustomJSONDecoder
 app.json_encoder = CustomJSONEncoder
