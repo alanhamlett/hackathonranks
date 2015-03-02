@@ -43,6 +43,7 @@ def login():
     scope = 'email,read_logged_time'
     state = {
         'c':g.csrftoken,
+        'n': '/',
     }
     params = {
         'response_type': 'code',
