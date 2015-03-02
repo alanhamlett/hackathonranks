@@ -12,6 +12,7 @@ import urlparse
 
 from flask import json, g
 
+from app import app
 from app.compat import u
 
 
@@ -30,9 +31,11 @@ def get_and_validate_state(request):
     except:
         state = {}
     if not isinstance(state, dict):
+        app.logger.error('State is not a dict.')
         return None
     url_token = state.get('c')
     cookie_token = g.csrftoken
     if not cookie_token or u(url_token) != u(cookie_token):
+        app.logger.error('State {0} does not match {1}'.format(u(url_token), u(cookie_token)))
         return None
     return state
