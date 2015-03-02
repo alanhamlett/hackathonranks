@@ -31,7 +31,7 @@ else:
 REMEMBER_COOKIE_NAME = 'remember_token'
 REMEMBER_COOKIE_DURATION = timedelta(weeks=4)
 REMEMBER_COOKIE_DOMAIN = '.'+HOSTNAME
-REMEMBER_COOKIE_SECURE = False if DEV else True
+REMEMBER_COOKIE_SECURE = False
 REMEMBER_COOKIE_HTTPONLY = True
 
 # Flask-SeaSurf CSRF
@@ -39,14 +39,14 @@ CSRF_DISABLE = False
 CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_COOKIE_TIMEOUT = timedelta(days=7)
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = False if DEV else True
+CSRF_COOKIE_SECURE = False
 
 # Flask-WTF
 CSRF_ENABLED = False
 
 # Flask
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = False if DEV else True
+SESSION_COOKIE_SECURE = False
 
 # Static Files
 STATIC_FOLDER = os.path.abspath(os.path.join(BASE_DIR, 'app/static'))
