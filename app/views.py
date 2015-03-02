@@ -61,11 +61,13 @@ def login_callback():
     # validate csrf token from state
     state = utils.get_and_validate_state(request)
     if not state:
+        app.logger.error('Invalid state.')
         abort(403)
 
     code = request.args.get('code')
     error = request.args.get('error')
     if not code or error:
+        app.logger.error('Error: {0}'.format(error))
         abort(400)
 
     # get access token
@@ -87,6 +89,7 @@ def login_callback():
     app.logger.debug(response.text)
 
     if response.status_code != 200:
+        app.logger.error(response.text)
         abort(500)
 
     access_token = response.json().get('access_token')
@@ -106,6 +109,7 @@ def login_callback():
     app.logger.debug(response.text)
 
     if response.status_code != 200:
+        app.logger.error(response.text)
         abort(400)
 
     if response.json()['data']['username']:
