@@ -32,7 +32,10 @@ blueprint = Blueprint('views', __name__)
 
 @blueprint.route('/')
 def index():
-    return render_template('index.html')
+    context = {
+        'hackathons': Hackathon.query.all(),
+    }
+    return render_template('index.html', **context)
 
 
 @blueprint.route('/login')
