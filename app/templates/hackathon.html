@@ -12,8 +12,8 @@
     <div class="row m-top-xs-20 hackers">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3 center-xs left-sm">
         <h2>Top Hackers at {{hackathon.name}}</h2>
-        {% for hacker in hackers %}
-          <p class="hacker">#{{loop.index}} Hacker {% if hacker.avatar_url %}<img src="{{hacker.avatar_url}}" height="20" width="20" />{% endif %}<a href="{{hacker.profile_url}}">{{hacker.full_name or hacker.username}}</a> coded {{hacker.coding_time}}</p>
+        {% for hacker in hackathon.ranks.all() %}
+          <p class="hacker">#{{loop.index}} Hacker {% if hacker.user.avatar_url %}<img src="{{hacker.user.avatar_url}}" height="20" width="20" class="img-rounded" />{% endif %}<a href="{{hacker.user.profile_url}}">{{hacker.user.full_name or hacker.user.username}}</a> coded {{hacker.coding_time}}</p>
         {% endfor %}
       </div>
     </div>

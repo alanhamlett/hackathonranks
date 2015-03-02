@@ -332,7 +332,7 @@ class User(Model):
     profile_url = db.Column(db.String(4000))
     avatar_url = db.Column(db.String(4000))
     hackathons = db.relationship('Hackathon', lazy='dynamic')
-    ranks = db.relationship('Rank', lazy='dynamic', backref='admin')
+    ranks = db.relationship('Rank', lazy='dynamic', backref='user')
     created_at = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
     modified_at = db.Column(db.DateTime(), onupdate=datetime.utcnow)
 
@@ -415,3 +415,4 @@ class Rank(Model):
             coding_time = '{0}{1} minute{2} '.format(coding_time, minutes, plural)
         plural = 's' if seconds != 1 else ''
         coding_time = '{0}{1} second{2} '.format(coding_time, seconds, plural)
+        return coding_time

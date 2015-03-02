@@ -97,7 +97,11 @@ def login_callback():
         'Authorization': 'Basic {0}'.format(base64.b64encode(access_token)),
         'User-Agent': app.config['USER_AGENT'],
     }
-    response = requests.get('https://wakatime.com/api/v1/users/current', headers=headers)
+    response = requests.get('https://wakatime.com/api/v1/users/current?token=' + access_token, headers=headers)
+
+    app.logger.debug(response.status_code)
+    app.logger.debug(response.text)
+
     if response.status_code != 200:
         abort(400)
 
@@ -119,7 +123,7 @@ def login_callback():
 
     auth.login_user(user)
 
-    if utils.is_safe_url(state.get('n')):
+    if auth.is_safe_url(state.get('n')):
         return redirect(state.get('n'))
     return redirect('/')
 
@@ -146,20 +150,28 @@ def hackathon_join(hackathon_name):
 
     headers = {
         'Accept': 'application/json',
-        'Authorization': 'Basic {0}'.format(base64.b64encode(app.current_user.wakatime_token)),
         'User-Agent': app.config['USER_AGENT'],
     }
     timezone = pytz.timezone(hackathon.timezone)
     params = {
         'start': hackathon.coding_starts_at.replace(tzinfo=pytz.utc).astimezone(timezone).strftime('%m/%d/%Y'),
         'end': hackathon.coding_ends_at.replace(tzinfo=pytz.utc).astimezone(timezone).strftime('%m/%d/%Y'),
+        'token': app.current_user.wakatime_token,
     }
     response = requests.get('https://wakatime.com/api/v1/users/current/summaries', headers=headers, params=params)
+
+    app.logger.debug(response.status_code)
+    app.logger.debug(response.text)
+
     if response.status_code != 200:
         abort(400)
 
+    total_seconds = 0
+    for day in response.json()['data']:
+        total_seconds += day['grand_total']['total_seconds']
+
     defaults = {
-        'total_seconds': response.json()['data']['grand_total']['total_seconds'],
+        'total_seconds': total_seconds,
     }
     rank = Rank.get_or_create(defaults=defaults, hackathon_id=hackathon.id, user_id=app.current_user.id)
     rank.set_columns(**defaults)
@@ -167,7 +179,6 @@ def hackathon_join(hackathon_name):
 
     context = {
         'hackathon': hackathon,
-        'hackers': hackathon.ranks.all(),
     }
     return render_template('hackathon.html', **context)
 
@@ -177,7 +188,8 @@ def hackathon_join(hackathon_name):
 def create_hackathon():
     form = HackathonForm(request.form)
     if request.method == 'POST' and form.validate():
-        hackathon = Hackathon(user_id=app.current_user.id, **form.data)
+        hackathon = Hackathon(admin_id=app.current_user.id, **form.data)
+        db.session.add(hackathon)
         db.session.commit()
         return redirect('/hackathon/'+hackathon.name)
     context = {
